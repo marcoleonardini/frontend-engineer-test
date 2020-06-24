@@ -1,3 +1,5 @@
+# Plataforma Testeada: Android
+
 # frontend_engineer_test
 
 En este proyecto se solucionara los siguientes requisitos
