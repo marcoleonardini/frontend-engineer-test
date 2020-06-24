@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Fast Food',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.red,
           visualDensity: VisualDensity.adaptivePlatformDensity,
