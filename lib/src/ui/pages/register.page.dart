@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:frontend_engineer_test/src/core/models/user.model.dart';
 import 'package:frontend_engineer_test/src/core/services/login.service.dart';
 import 'package:frontend_engineer_test/src/ui/pages/home.page.dart';
-import 'package:frontend_engineer_test/src/ui/pages/register.page.dart';
+import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
 
-class LoginPage extends StatefulWidget {
-  static final String route = '/';
-
+class RegisterPage extends StatefulWidget {
+  static final String route = 'register';
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _scaffolKey = GlobalKey<ScaffoldState>();
 
   final _passwordFocus = FocusNode();
+  final _emailFocus = FocusNode();
 
   bool _isloading = false;
 
@@ -29,9 +29,9 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isloading = true;
       });
-      if (!(await LoginService().login(_user))) {
+      if (!(await LoginService().register(_user))) {
         _scaffolKey.currentState.showSnackBar(SnackBar(
-          content: Text('Authentication failed, try again.'),
+          content: Text('Sign Up failed, try a diferent username.'),
         ));
         setState(() {
           _isloading = false;
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: ListView(children: <Widget>[
               Text(
-                'Login',
+                'Sign Up',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline4,
               ),
@@ -76,9 +76,23 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(labelText: 'password'),
                 focusNode: _passwordFocus,
                 obscureText: true,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_emailFocus);
+                },
                 onSaved: (value) => _user.password = value,
                 validator: (value) {
                   if (value.isEmpty) return 'The password must not be empty';
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'email'),
+                focusNode: _emailFocus,
+                onSaved: (value) => _user.password = value,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value.isEmpty) return 'The password must not be empty';
+                  if (!value.contains('@')) return 'The email is invalid';
                   return null;
                 },
               ),
@@ -92,12 +106,12 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         _submit();
                       },
-                      child: Text('Log In'),
+                      child: Text('Sign up'),
                     ),
               FlatButton(
-                child: Text('Sign up'),
+                child: Text('Log in'),
                 onPressed: () {
-                  Navigator.pushNamed(context, RegisterPage.route);
+                  Navigator.pushReplacementNamed(context, LoginPage.route);
                 },
               )
             ]),

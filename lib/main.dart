@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_engineer_test/src/ui/pages/home.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
+import 'package:frontend_engineer_test/src/ui/pages/register.page.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +17,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      initialRoute: LoginPage.route,
+      routes: {
+        LoginPage.route: (context) => LoginPage(),
+        RegisterPage.route: (context) => RegisterPage(),
+        HomePage.route: (context) => HomePage(),
+      },
     );
   }
 }
