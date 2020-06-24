@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_engineer_test/src/core/models/user.model.dart';
+import 'package:frontend_engineer_test/src/core/providers/user.provider.dart';
 import 'package:frontend_engineer_test/src/core/services/login.service.dart';
 import 'package:frontend_engineer_test/src/ui/pages/home.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static final String route = 'register';
@@ -37,6 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
           _isloading = false;
         });
       } else {
+        Provider.of<UserProvider>(context, listen: false).setUser(_user);
         Navigator.pushReplacementNamed(context, HomePage.route);
       }
     }

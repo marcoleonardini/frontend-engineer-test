@@ -4,9 +4,14 @@ import 'package:frontend_engineer_test/src/core/models/restaurant.model.dart';
 import 'package:http/http.dart' as http;
 
 class RestaurantService {
-  Future<List<Restaurant>> getRestaurants() async {
+  Future<List<Restaurant>> getRestaurants({String city}) async {
+    var queryParameters = {
+      'query': city,
+    };
+    var uri = Uri.https(
+        'tripadvisor1.p.rapidapi.com', '/locations/search', queryParameters);
     var result = await http.get(
-      'https://tripadvisor1.p.rapidapi.com/locations/search?query=london',
+      uri,
       headers: {
         'X-RapidAPI-Key': '2466a463aemsh10daabd0f3fd13cp1171a4jsn0723378229c1'
       },
