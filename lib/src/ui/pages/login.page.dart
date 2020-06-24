@@ -47,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffolKey,
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffolKey,
+        body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           constraints: BoxConstraints.expand(),
           child: Form(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 decoration: InputDecoration(
                     labelText: 'user',
-                    errorStyle: TextStyle(color: Colors.red)),
+                    errorStyle: TextStyle(color: Colors.redAccent)),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_passwordFocus);
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               _isloading
                   ? Center(child: CircularProgressIndicator())
                   : FlatButton(
-                      color: Colors.orange,
+                      color: Colors.red,
                       onPressed: () {
                         _submit();
                       },

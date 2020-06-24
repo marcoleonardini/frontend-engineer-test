@@ -4,6 +4,7 @@ import 'package:frontend_engineer_test/src/core/providers/restaurants.provider.d
 import 'package:frontend_engineer_test/src/core/providers/user.provider.dart';
 import 'package:frontend_engineer_test/src/ui/pages/history.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
+import 'package:frontend_engineer_test/src/ui/pages/map.page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
                 onChanged: (value) => _city = value,
               ),
               FlatButton(
-                color: Colors.orange,
+                color: Colors.red,
                 child: Text('Search'),
                 onPressed: () {
                   Provider.of<RestaurantsProvider>(context, listen: false)
@@ -71,6 +72,10 @@ class HomePage extends StatelessWidget {
                         title: Text(restaurant.name),
                         subtitle:
                             Text('Reviews by ${restaurant.numReviews} people'),
+                        onTap: () {
+                          Navigator.pushNamed(context, MapPage.route,
+                              arguments: restaurant);
+                        },
                       );
                     },
                   );
