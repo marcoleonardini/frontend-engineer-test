@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_engineer_test/src/core/models/restaurant.model.dart';
 import 'package:frontend_engineer_test/src/core/providers/restaurants.provider.dart';
 import 'package:frontend_engineer_test/src/core/providers/user.provider.dart';
+import 'package:frontend_engineer_test/src/ui/pages/history.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,8 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(Provider.of<UserProvider>(context).user.username),
+          title: Text(
+              'Welcome ${Provider.of<UserProvider>(context).user.username}'),
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.power_settings_new),
@@ -24,6 +26,10 @@ class HomePage extends StatelessWidget {
                 })
           ],
         ),
+        floatingActionButton: (FloatingActionButton(
+          child: Icon(Icons.history),
+          onPressed: () => Navigator.pushNamed(context, HistoryPage.route),
+        )),
         body: Container(
           constraints: BoxConstraints.expand(),
           child: Column(
