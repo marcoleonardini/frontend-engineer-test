@@ -4,6 +4,7 @@ import 'package:frontend_engineer_test/src/core/providers/user.provider.dart';
 import 'package:frontend_engineer_test/src/ui/pages/history.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/home.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/login.page.dart';
+import 'package:frontend_engineer_test/src/ui/pages/map.page.dart';
 import 'package:frontend_engineer_test/src/ui/pages/register.page.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           RegisterPage.route: (context) => RegisterPage(),
           HomePage.route: (context) => HomePage(),
           HistoryPage.route: (context) => HistoryPage(),
+          MapPage.route: (context) => MapPage(),
         },
       ),
     );
