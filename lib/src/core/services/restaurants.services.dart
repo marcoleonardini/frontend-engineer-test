@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:frontend_engineer_test/src/core/const/services.const.dart';
 import 'package:frontend_engineer_test/src/core/models/restaurant.model.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,20 +9,17 @@ class RestaurantService {
     var queryParameters = {
       'query': city,
     };
-    var uri = Uri.https(
-        'tripadvisor1.p.rapidapi.com', '/locations/search', queryParameters);
+    var uri = Uri.https(ServicesConst.restaurantsBaseURL,
+        ServicesConst.restaurantsSearch, queryParameters);
     var result = await http.get(
       uri,
-      headers: {
-        'X-RapidAPI-Key': '2466a463aemsh10daabd0f3fd13cp1171a4jsn0723378229c1'
-      },
+      headers: {'X-RapidAPI-Key': ServicesConst.serverKey},
     );
 
     var resultDecoded = jsonDecode(result.body);
     List<Restaurant> _listRestaurant = [];
     for (var item in resultDecoded['data']) {
       Restaurant restaurant = Restaurant.fromJson(item['result_object']);
-      // print(item['result_object']['photo']['images']['medium']);
       print(restaurant.photo);
       _listRestaurant.add(restaurant);
     }
